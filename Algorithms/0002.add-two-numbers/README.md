@@ -39,25 +39,22 @@ class ListNode(object):
 
 class Solution(object):
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        ret = cur = ListNode(0)
-        carry = 0
-        while l1 or l2:
-            val = carry + (l1.val if l1 else 0) + (l2.val if l2 else 0)
-            cur.next = ListNode(val % 10)
-            carry = val // 10
-            cur = cur.next
-            if l1 is not None:
+        ret = temp = ListNode(0)
+        val = 0
+        while l1 or l2 or val:
+            if l1:
+                val += l1.val
                 l1 = l1.next
-            if l2 is not None:
+            if l2:
+                val += l2.val
                 l2 = l2.next
-        if carry > 0:
-            cur.next = ListNode(1)
+            temp.next = ListNode(val % 10)
+            val //= 10
+            temp = temp.next
         return ret.next
 
 if __name__ == '__main__':
     print(Solution().addTwoNumbers(
         ListNode(2, ListNode(4, ListNode(3))),
-        ListNode(5, ListNode(6, ListNode(4)))
-        )
-    )
+        ListNode(5, ListNode(6, ListNode(4)))))
 ```
