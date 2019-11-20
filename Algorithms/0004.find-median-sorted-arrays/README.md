@@ -61,7 +61,7 @@ from typing import List
 
 class Solution(object):
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        #保证num1的长度小于nums2
+        # 保证 num1 的长度小于 nums2
         if len(nums1) > len(nums2):
             nums1, nums2 = nums2, nums1
         m = len(nums1)
@@ -86,4 +86,38 @@ class Solution(object):
 
 if __name__ == '__main__':
     print(Solution().findMedianSortedArrays([1, 2], [3, 4]))
+```
+
+## 题解 2
+
+[寻找两个有序数组的中位数 C / C++](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/4-xun-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-shu/)
+
+## 标程 2
+
+```python
+from typing import List
+
+class Solution(object):
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        n, m = len(nums1), len(nums2)
+        if n > m:
+            return self.findMedianSortedArrays(nums2, nums1)
+        
+        lo, hi = 0, 2 * n
+        while lo <= hi:
+            c1 = (lo + hi) // 2
+            c2 = m + n - c1
+
+            LMax1 = float('-inf') if c1 == 0 else nums1[(c1 - 1) // 2]
+            RMin1 = float('inf') if c1 == 2 * n else nums1[c1 // 2]
+            LMax2 = float('-inf') if c2 == 0 else nums2[(c2 - 1) // 2]
+            RMin2 = float('inf') if c2 == 2 * m else nums2[c2 // 2]
+
+            if LMax1 > RMin2:
+                hi = c1 - 1
+            elif LMax2 > RMin1:
+                lo = c1 + 1
+            else:
+                break
+        return (max(LMax1, LMax2) + min(RMin1, RMin2)) / 2.0
 ```
