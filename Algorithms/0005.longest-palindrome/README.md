@@ -55,10 +55,8 @@ class Solution:
                 dp[i][j] = (s[i] == s[j] and (j - i < 2 or dp[i + 1][j - 1]))
                 if dp[i][j] and j - i > ma:
                     ma = j - i
-                    ret = s[i:j + 1]
+                    ret = s[i: j + 1]
         return ret
-
-
 
 if __name__ == '__main__':
     print(
