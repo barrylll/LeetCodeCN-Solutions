@@ -35,16 +35,18 @@ class Solution(object):
         if numRows == 1:
             return s
         else:
-            ret = ""
+            ret = [""] * numRows
             mod = 2 * (numRows - 1)
-            for j in range(numRows):
-                for i in range(len(s)):
-                    if i % mod == j or i % mod == mod - j:
-                        ret = ret + s[i]
-            return ret
+            for i in range(len(s)):
+                t = i % mod
+                if t < numRows:
+                    ret[t] = ret[t] + s[i]
+                else:
+                    ret[mod - t] = ret[mod - t] + s[i]
+            return "".join(ret)
 
 if __name__ == '__main__':
     print(
-        Solution().convert("A", 1)
+        Solution().convert("LEETCODEISHIRING", 3)
     )
 ```
