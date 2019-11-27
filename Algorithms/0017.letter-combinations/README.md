@@ -45,3 +45,41 @@ if __name__ == '__main__':
         Solution().letterCombinations("23")
     )
 ```
+
+## 题解 2
+
+用 `itertools` 里的 `product` 函数作笛卡尔乘积
+
+## 标程 2
+
+```python
+from typing import List
+
+class Solution(object):
+    def letterCombinations(self, digits: str) -> List[str]:
+        import itertools
+        from functools import reduce
+        
+        dic = {
+            '2': 'abc',
+            '3': 'def',
+            '4': 'ghi',
+            '5': 'jkl',
+            '6': 'mno',
+            '7': 'pqrs',
+            '8': 'tuv',
+            '9': 'wxyz',
+        }
+        
+        def my_product(a, b):
+            return tuple(map(''.join, itertools.product(a, b)))
+
+        if digits == '':
+            return []
+        else:
+            return list(reduce(my_product, [dic[i] for i in digits]))
+        
+if __name__ == '__main__':
+    print(Solution().letterCombinations("23"))
+```
+
