@@ -71,7 +71,7 @@ if __name__ == '__main__':
 ```
 
 ## 标程（分治）
-```
+```python
 from typing import List
 
 
