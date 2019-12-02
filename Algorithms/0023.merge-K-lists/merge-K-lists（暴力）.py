@@ -19,16 +19,14 @@ class Solution(object):
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         ret = ListNode(0)
         l = []
-        for i in range(len(lists)):
-            temp = lists[i]
-            while temp:
-                l.append(temp.val)
-                temp = temp.next
+        for list_i in lists:
+            while list_i:
+                l.append(list_i.val)
+                list_i = list_i.next
         l.sort()
         temp = ret
-        for i in range(len(l)):
-            temp.next = ListNode(0)
-            temp.next.val = l[i]
+        for val_i in l:
+            temp.next = ListNode(val_i)
             temp = temp.next
         return ret.next
 
