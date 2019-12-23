@@ -59,10 +59,8 @@ class Solution(object):
     def simplifyPath(self, path: str) -> str:
         path_list = []
         temp = ""
-        flag = 0
         for i in range(len(path)):
             if path[i] == "/":
-                flag ^= 1
                 while i < len(path) - 1 and path[i + 1] == "/":
                     i += 1
                 if temp:
